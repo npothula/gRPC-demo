@@ -1,0 +1,13 @@
+
+version: '3.7'
+services:
+  grpchelloworld:
+    image: '${REGISTRY}:${BUILD_NAME}-${BUILD_NUMBER}'
+    build: .
+    ports:
+      - '50051:50051'
+    networks:
+      - helloworld-net
+
+networks:
+  helloworld-net:

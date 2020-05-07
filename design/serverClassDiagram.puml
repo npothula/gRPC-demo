@@ -1,0 +1,11 @@
+@startuml gRPCHelloWorldServer
+namespace main {
+    class server << (S,Aquamarine) >> {
+        + SayHello(ctx context.Context, in *helloworld.HelloRequest) (*helloworld.HelloReply, error)
+        + Run()
+
+    }
+}
+
+
+@enduml

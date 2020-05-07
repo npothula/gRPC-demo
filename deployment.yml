@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: grpc-demo-helloworld
+spec:
+  selector:
+    app: grpc-demo-helloworld
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 50051
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grpc-demo-helloworld
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: grpc-demo-helloworld
+  template:
+    metadata:
+      labels:
+        app: grpc-demo-helloworld
+    spec:
+      containers:
+      - name: grpc-demo-helloworld
+        image: npothula/docker-hub:grpc-demo-helloworld-1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 512Mi
+          requests:
+            cpu: "0.5"
+            memory: 256Mi
+        ports:
+        - containerPort: 50051
