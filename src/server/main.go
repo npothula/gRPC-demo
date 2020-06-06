@@ -35,7 +35,8 @@ func (s *server) Run() {
 	}
 	log.Printf("Listenging at port %s", port)
 
-	grpcServer := grpc.NewServer()
+	var opts []grpc.ServerOption
+	grpcServer := grpc.NewServer(opts...)
 	pb.RegisterHelloWorldServer(grpcServer, &server{})
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
